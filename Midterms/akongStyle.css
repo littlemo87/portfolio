@@ -1,0 +1,9 @@
+#mergedCell {
+    color: black; }
+     th, td { 
+    padding: 10px;
+    } th {
+    background-color: #90c7a8;
+    } td {
+    background-color: #eec7e6;
+    }

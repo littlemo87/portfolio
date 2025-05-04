@@ -1,0 +1,71 @@
+body {
+    background-color: rgb(226, 207, 183);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+h1 {
+    font-weight: bold;
+    color: red;
+}
+
+
+#italic {
+    font-style: italic;
+}
+
+#underline {
+    text-decoration: underline;
+}
+
+
+.list-1 {
+    color: blue;
+}
+
+.list-2 {
+    color: green;
+}
+
+.list-3 {
+    color: purple;
+}
+
+.list-4 {
+    color: orange;
+}
+
+.list-5 {
+    color: brown;
+}
+
+.list-6 {
+    color: teal;
+}
+
+
+ol {
+    list-style-type: decimal;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul.circle li::before {
+    content: '\2022';
+    color: inherit;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+ul.square li::before {
+    content: '\25A0';
+    color: inherit;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}

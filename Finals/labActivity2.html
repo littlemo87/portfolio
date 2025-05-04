@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rafael Saliganan's EVEN, ODD & PRIME, COMPOSITE</title>
+    <script>
+        function getValues() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            count = 0;
+
+            return [num1];
+        }
+        //Odd or Even
+            function odd() {
+             const [num1] = getValues();
+             if (num1%2==0)
+             document.getElementById("result").textContent = "THE NUMBER IS EVEN";
+        
+
+             else {
+                document.getElementById("result").textContent = "THE NUMBER IS ODD";   
+             }
+        
+             if (num1<=1) {         
+              document.getElementById("result2").textContent = "INVALID";
+             }
+             else {
+              //Prime or Composite
+              for (i=1; i<=num1; i++) {
+            if (num1%i==0) {
+                count++;
+            }
+
+    }
+           if  (count<=2)
+            document.getElementById("result2").textContent = "PRIME";
+            else   {
+            document.getElementById("result2").textContent = "COMPOSITE";
+        }
+}
+        }
+        
+    
+
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .inputs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            background-color: #d8800d;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #bb8f54;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Rafael Saliganan's Odd-Even, Prime, Composite Determiner</h2>
+        <div class="inputs">
+            <input type="text" id="num1" placeholder="Type A Number">
+        </div>
+        <div>
+            <button onclick="odd()">Submit</button>
+        </div>
+        <div id="result"></div>
+        <div id="result2"></div>
+    </div>
+</body>
+</html>
+

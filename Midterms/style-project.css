@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RR - Portfolio</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: black;
+      color: #e7e7e7;
+      min-height: 100vh;
+      overflow-x: hidden;
+      pointer-events: none; /* Keep non-clickable background */
+    }
+
+    /* Only background layers ignore clicks */
+    .video-background,
+    .blur {
+      pointer-events: none;
+    }
+
+    header, nav, nav a, .projects-section, .project-card, .btn-view-project {
+      pointer-events: auto;
+    }
+
+    /* Background */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.5;
+    }
+
+    .blur {
+      height: 0;
+      width: 30rem;
+      position: absolute;
+      top: 20%;
+      right: 0;
+      box-shadow: 0 0 700px 15px white;
+      rotate: -30deg;
+      z-index: -1;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(3px);
+      padding: 1rem 3rem;
+      transition: background 0.3s ease-in-out;
+      height: 100px;
+      line-height: 100px;
+    }
+
+    .navbar:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .navbar-brand {
+      font-size: 2rem;
+      font-weight: 300;
+      color: #e7e7e7;
+    }
+
+    .nav-link {
+      color: #e7e7e7;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #a7a7a7;
+    }
+
+    .navbar-brand img {
+      width: 150px;
+      height: auto;
+    }
+
+    /* Dropdown Menu */
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu {
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #e7e7e7;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      position: absolute;
+      z-index: 1;
+    }
+
+    .dropdown-item {
+      color: #e7e7e7;
+      font-weight: 400;
+    }
+
+    .dropdown-item:hover {
+      background-color: #555;
+    }
+
+    /* Main Section */
+    .projects-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .projects-section h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #e7e7e7;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .photos-section h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #e7e7e7;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+      font-weight: 400;
+      text-align: center;
+    }
+
+    /* Project Card */
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1rem auto;
+      padding: 2rem;
+      width: 90%;
+      max-width: 800px;
+      height: 400px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .project-card img {
+      width: 40%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 5%;
+    }
+
+    .project-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      width: 55%;
+    }
+
+    .project-title {
+      font-size: 1.8rem;
+      color: #e7e7e7;
+      margin-bottom: 1rem;
+    }
+
+    .project-description {
+      font-size: 1rem;
+      color: grey;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-start;
+    }
+
+    .btn-view-project {
+      background: transparent;
+      border: 1px solid #e7e7e7;
+      color: #e7e7e7;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-view-project:hover {
+      background: #e7e7e7;
+      color: black;
+      transform: translateY(-2px);
+    }
+
+    /* Photo Section */
+    .photos-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      pointer-events: auto; /* Allow clicks inside photos section */
+    }
+
+    /* Center filter buttons and ensure clickable */
+    .photos-section .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+      pointer-events: auto;
+    }
+
+    .photo-card {
+      display: inline-block;
+      margin: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      width: 300px;
+      height: 400px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .btn-sort {
+      background: transparent;
+      border: 1px solid #e7e7e7;
+      color: #e7e7e7;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      pointer-events: auto; /* ensure buttons receive clicks */
+    }
+
+    .btn-sort:hover {
+      background: #e7e7e7;
+      color: black;
+      transform: translateY(-2px);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <img src="https://media.sellfy.com/images/KjQ3rNHl/g0Ev/preview.gif" alt="Background GIF" class="video-background">
+  <div class="blur"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://www.youtube.com/@littlemo1838/videos" target="_blank">
+        <img src="https://i.imgur.com/NJU3Vrm.png" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="academic-projects.html">Academic Projects</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contacts.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <section class="projects-section">
+
+      <!-- Creative Projects Section -->
+      <h2>Films</h2>
+      <div id="creativeProjectsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- carousel-items omitted for brevity... keep as-is -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#creativeProjectsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#creativeProjectsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="photos-section">
+      <h2>Photographs</h2>
+      <div class="button-group">
+        <button class="btn-sort" onclick="filterPhotos('bw')">Black & White</button>
+        <button class="btn-sort" onclick="filterPhotos('dreamy')">Dreamy</button>
+        <button class="btn-sort" onclick="filterPhotos('scenery')">Scenery</button>
+      </div>
+
+      <div id="photoGallery">
+        <div class="photo-card bw"><img src="path/to/bw-photo1.jpg" alt="Black & White Photo 1"></div>
+        <div class="photo-card bw"><img src="path/to/bw-photo2.jpg" alt="Black & White Photo 2"></div>
+        <div class="photo-card dreamy"><img src="path/to/dreamy-photo1.jpg" alt="Dreamy Photo 1"></div>
+        <div class="photo-card dreamy"><img src="path/to/dreamy-photo2.jpg" alt="Dreamy Photo 2"></div>
+        <div class="photo-card scenery"><img src="path/to/scenery-photo1.jpg" alt="Scenery Photo 1"></div>
+        <div class="photo-card scenery"><img src="path/to/scenery-photo2.jpg" alt="Scenery Photo 2"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JavaScript for Filtering Photos -->
+  <script>
+    function filterPhotos(category) {
+      const allPhotos = document.querySelectorAll('.photo-card');
+      allPhotos.forEach(photo => photo.classList.add('hidden'));
+      document.querySelectorAll('.' + category).f

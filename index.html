@@ -1,0 +1,2134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- AOS Animation CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+
+
+<style>
+
+.film-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 800px;
+  height: 400px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+.film-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+.film-card img {
+  width: 40%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 5%;
+}
+.film-project-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 55%;
+  margin-left: 1rem;
+}
+.film-project-title {
+  font-size: 1.8rem;
+  color: #e7e7e7;
+  margin-bottom: 1rem;
+}
+.film-project-description {
+  font-size: 1rem;
+  color: grey;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+.film-button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  width: 100%;
+}
+.film-btn-view-project {
+  background: transparent;
+  border: 1px solid #e7e7e7;
+  color: #e7e7e7;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+.film-btn-view-project:hover {
+  background: #e7e7e7;
+  color: black;
+  transform: translateY(-2px);
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: #e7e7e7;
+    min-height: 100vh;
+    padding-top: 100px; /* navbar space */
+    overflow-x: hidden;
+  }
+  /* Navbar styles, light/dark mode etc omitted for braevity */
+  
+  /* Projects Section */
+  .projects-section {
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .projects-section h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: #e7e7e7;
+    font-weight: 400;
+    text-shadow: 0 0 10px rgba(255,255,255,0.15);
+  }
+
+  /* Sort Select */
+  #sortSelect {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid #e7e7e7;
+    color: #e7e7e7;
+    border-radius: 50px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 250px;
+    margin-bottom: 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #sortSelect:hover,
+  #sortSelect:focus {
+    background: rgba(255,255,255,0.1);
+    outline: none;
+  }
+  #sortSelect option {
+    background: black;
+    color: #e7e7e7;
+  }
+
+  /* Grid container for cards */
+  #projectContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  /* Project card style */
+  .project-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
+  }
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+  }
+  .project-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #e7e7e7;
+  }
+  .project-description {
+    font-size: 1rem;
+    color: grey;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .button-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  .btn-view-project {
+    background: transparent;
+    border: 1px solid #e7e7e7;
+    color: #e7e7e7;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1rem;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-view-project:hover {
+    background: #e7e7e7;
+    color: black;
+  }
+  
+body {
+background-color: white; /* Ensure the iframe has a white background */
+}
+
+/* Reset & basic */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Poppins', sans-serif;
+background-color: black;
+color: #e7e7e7;
+min-height: 100vh;
+overflow-x: hidden;
+overflow-y: auto;
+padding-top: 100px; /* space for fixed navbar */
+}
+.video-background, .blur {
+pointer-events: none;
+}
+header, nav, nav a, .projects-section, .academic-project-card, .creative-project-card,
+.btn-view-project, #sortSelect, .btn-sort, form button {
+pointer-events: auto;
+}
+.video-background {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+object-fit: cover; z-index: -2; opacity: 0.5;
+}
+.blur {
+height: 0; width: 30rem; position: absolute; top: 20%; right: 0;
+box-shadow: 0 0 700px 15px white; rotate: -30deg; z-index: -1;
+}
+.navbar {
+background: rgba(0, 0, 0, 0.6);
+backdrop-filter: blur(3px);
+padding: 1rem 3rem;
+transition: background 0.3s;
+height: 100px;
+line-height: 100px;
+}
+.navbar:hover { background: rgba(0, 0, 0, 0.8); }
+.navbar-brand { font-size: 2rem; font-weight: 300; color: #e7e7e7; }
+.navbar-nav .nav-link {
+color: #e7e7e7 !important;
+font-weight: 500;
+transition: color 0.2s;
+}
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+color: #a7a7a7 !important;
+font-weight: 600;
+}
+.nav-item.dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu {
+background-color: rgba(0, 0, 0, 0.8);
+border: 1px solid #e7e7e7;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+margin-top: 0;
+}
+.dropdown-item {
+color: #e7e7e7 !important;
+transition: background 0.2s, color 0.2s;
+}
+.dropdown-item:hover,
+.dropdown-item.active {
+background-color: #555 !important;
+color: #a7a7a7 !important;
+}
+.projects-section {
+padding: 6rem 2rem;
+text-align: center;
+position: relative;
+z-index: 1;
+}
+.projects-section h2 {
+font-size: 3rem;
+margin-bottom: 2rem;
+color: #e7e7e7;
+text-shadow: 0 0 10px rgba(255,255,255,0.15);
+font-weight: 400;
+text-align: center;
+}
+.projects-section p {
+font-size: 1.25rem;
+color: grey;
+margin-bottom: 2rem;
+}
+#sortSelect {
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(8px);
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+border-radius: 50px;
+padding: 0.6rem 1.2rem;
+font-size: 1rem;
+font-weight: 500;
+width: 250px;
+transition: all 0.3s ease;
+appearance: none;
+margin-bottom: 3rem;
+cursor: pointer;
+}
+#sortSelect:hover {
+background: rgba(255,255,255,0.1);
+}
+#sortSelect:focus {
+background: rgba(255,255,255,0.1);
+outline: none;
+box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+#sortSelect option {
+background: black;
+color: #e7e7e7;
+}
+.scroll-container {
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+gap: 2rem;
+padding-bottom: 2rem;
+}
+.scroll-container::-webkit-scrollbar { display: none; }
+.academic-project-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: 25px;
+padding: 2rem;
+height: 500px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.academic-project-card:hover {
+transform: scale(1.05);
+box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+.academic-project-card img {
+width: 100%;
+height: 220px;
+object-fit: cover;
+border-radius: 15px;
+margin-bottom: 1rem;
+}
+.academic-project-card .project-title {
+font-size: 1.5rem;
+color: #e7e7e7;
+margin-bottom: 0.5rem;
+}
+.academic-project-card .project-description {
+font-size: 0.95rem;
+color: grey;
+margin-bottom: 1.5rem;
+letter-spacing: 0.05em;
+}
+.creative-project-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: 25px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: 1rem auto;
+padding: 2rem;
+width: 90%;
+max-width: 800px;
+height: 400px;
+box-shadow: 0 0 15px rgba(255,255,255,0.1);
+transition: transform 0.3s, box-shadow 0.3s;
+text-align: left;
+}
+.creative-project-card:hover {
+transform: scale(1.05);
+box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+
+#skills .certificates-container ul li {
+  color: #bbb; /* lighter color for dark mode */
+}
+
+/* For light mode, optional if you want darker text */
+body.light-mode #skills .certificates-container ul li {
+  color: #444 !important;
+}
+.creative-project-card img {
+width: 40%;
+height: auto;
+max-height: 100%;
+object-fit: contain;
+border-radius: 5%;
+}
+.project-content {
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: left;
+width: 55%;
+}
+.creative-project-card .project-title {
+font-size: 1.8rem;
+color: #e7e7e7;
+margin-bottom: 1rem;
+}
+.creative-project-card .project-description {
+font-size: 1rem;
+color: grey;
+margin-bottom: 1rem;
+letter-spacing: 0.05em;
+}
+.button-group {
+display: flex;
+gap: 10px;
+justify-content: center;
+width: 100%;
+}
+.btn-view-project {
+background: transparent;
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+padding: 0.5rem 1rem;
+border-radius: 50px;
+font-weight: 500;
+text-decoration: none;
+font-size: 1rem;
+transition: all 0.3s ease;
+flex: 1;
+text-align: center;
+cursor: pointer;
+}
+.btn-view-project:hover {
+background: #e7e7e7;
+color: black;
+transform: translateY(-2px);
+}
+#backToTopBtn {
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.4s ease;
+box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+position: fixed;
+bottom: 1.5rem;
+right: 1.5rem;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+font-size: 20px;
+z-index: 1050;
+background-color: #fff;
+color: black;
+border: none;
+}
+#backToTopBtn.show {
+opacity: 1;
+pointer-events: auto;
+}
+#backToTopBtn:hover {
+transform: scale(1.2);
+box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+cursor: pointer;
+}
+.photos-section {
+padding: 6rem 2rem;
+text-align: center;
+pointer-events: auto;
+position: relative;
+z-index: 1;
+}
+.photos-section h2 {
+font-size: 3rem;
+margin-bottom: 2rem;
+color: #e7e7e7;
+text-shadow: 0 0 10px rgba(255,255,255,0.15);
+font-weight: 400;
+text-align: center;
+}
+.photo-card {
+display: inline-block;
+margin: 1rem;
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(10px);
+border-radius: 15px;
+box-shadow: 0 0 15px rgba(255,255,255,0.1);
+vertical-align: middle;
+overflow: hidden;
+}
+.photo-card img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: 15px;
+display: block;
+}
+.btn-sort {
+background: transparent;
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+padding: 0.5rem 1rem;
+border-radius: 50px;
+font-weight: 500;
+text-decoration: none;
+font-size: 1rem;
+transition: all 0.3s ease;
+margin: 0 0.5rem 1rem 0.5rem;
+cursor: pointer;
+pointer-events: auto;
+user-select: none;
+}
+.btn-sort:hover {
+background: #e7e7e7;
+color: black;
+transform: translateY(-2px);
+}
+/* Skills Section with animation */
+#skills .progress {
+height: 25px;
+border-radius: 15px;
+margin-bottom: 1rem;
+background: rgba(255,255,255,0.1);
+overflow: visible;
+}
+#skills .progress-bar {
+font-weight: 600;
+color: black;
+width: 0;
+animation: progFill 2s forwards;
+}
+@keyframes progFill {
+to { width: var(--progress-width); }
+}
+#skills .certificates-container {
+max-width: 700px;
+margin: auto;
+text-align: left;
+}
+#skills .certificates-container ul {
+list-style: none;
+padding-left: 1rem;
+}
+#skills .certificates-container ul li {
+padding: 0.4rem 0;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+/* Contact */
+#contact {
+padding: 6rem 2rem;
+text-align: center;
+position: relative;
+z-index: 1;
+}
+#contact h2 {
+font-size: 3rem;
+margin-bottom: 2rem;
+color: #e7e7e7;
+text-shadow: 0 0 10px rgba(255,255,255,0.15);
+font-weight: 400;
+}
+#contact form {
+max-width: 600px;
+margin: auto;
+text-align: left;
+}
+#contact label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 600;
+}
+#contact input, #contact textarea {
+width: 100%;
+padding: 0.75rem 1rem;
+margin-bottom: 1.5rem;
+border-radius: 10px;
+border: none;
+background: rgba(255,255,255,0.1);
+color: #e7e7e7;
+font-size: 1rem;
+resize: vertical;
+}
+#contact input:focus, #contact textarea:focus {
+outline: none;
+box-shadow: 0 0 10px #e7e7e7;
+background: rgba(255,255,255,0.15);
+}
+#contact button {
+background-color: transparent;
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+padding: 0.7rem 2rem;
+border-radius: 50px;
+font-weight: 600;
+font-size: 1.1rem;
+transition: all 0.3s ease;
+}
+#contact button:hover {
+background-color: #e7e7e7;
+color: black;
+transform: translateY(-3px);
+cursor: pointer;
+}
+.error-message {
+color: #ff6b6b;
+margin-top: -1rem;
+margin-bottom: 1rem;
+font-size: 0.9rem;
+display: none;
+}
+
+/* Light Mode styles */
+body.light-mode {
+background-color: #fefefe;
+color: #222;
+pointer-events: auto;
+position: relative;
+}
+body.light-mode::before {
+content: "";
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background: url('https://i.makeagif.com/media/3-03-2015/frt5dl.gif') no-repeat center center fixed;
+background-size: cover;
+opacity: 0.12;
+z-index: -1;
+pointer-events: none;
+}
+/* Gray stuff darker in light mode */
+body.light-mode .projects-section p,
+body.light-mode .academic-project-card .project-description,
+body.light-mode .creative-project-card .project-description,
+body.light-mode .projects-section .btn-sort,
+body.light-mode .photos-section h2,
+body.light-mode .btn-sort,
+body.light-mode .error-message,
+body.light-mode #contact label {
+color: #444 !important;
+text-shadow: none !important;
+}
+body.light-mode .projects-section h2,
+body.light-mode #contact h2 {
+color: #222 !important;
+text-shadow: none !important;
+}
+body.light-mode .navbar {
+background: rgba(255, 255, 255, 0.8);
+backdrop-filter: none;
+}
+body.light-mode .navbar:hover {
+background: rgba(255, 255, 255, 1);
+}
+body.light-mode .navbar-brand,
+body.light-mode .nav-link,
+body.light-mode .dropdown-item {
+color: #222 !important;
+}
+body.light-mode .nav-link:hover,
+body.light-mode .nav-link.active,
+body.light-mode .dropdown-item:hover,
+body.light-mode .dropdown-item.active {
+color: #555 !important;
+}
+body.light-mode .academic-project-card,
+body.light-mode .creative-project-card,
+body.light-mode .photo-card {
+background: rgba(0, 0, 0, 0.05);
+backdrop-filter: none;
+color: #222;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .btn-view-project {
+border-color: #222;
+color: #222;
+}
+body.light-mode .btn-view-project:hover {
+background: #222;
+color: #fefefe;
+}
+body.light-mode #sortSelect {
+background: rgba(0,0,0,0.05);
+color: #222;
+border-color: #222;
+}
+body.light-mode #sortSelect:hover,
+body.light-mode #sortSelect:focus {
+background: rgba(0,0,0,0.1);
+}
+body.light-mode #backToTopBtn {
+background-color: #222;
+color: white;
+}
+body.light-mode #backToTopBtn:hover {
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+/* Mode toggle button */
+.mode-toggle-btn {
+background: transparent;
+border: none;
+font-size: 1.8rem;
+cursor: pointer;
+color: #e7e7e7;
+margin-left: 1rem;
+padding: 0;
+user-select: none;
+transition: color 0.3s ease;
+}
+.mode-toggle-btn:hover,
+.mode-toggle-btn:focus {
+color: #ccc;
+outline: none;
+}
+body.light-mode .mode-toggle-btn {
+color: #222;
+}
+body.light-mode .mode-toggle-btn:hover,
+body.light-mode .mode-toggle-btn:focus {
+color: #555;
+}
+/* Light mode dropdown fixes */
+body.light-mode .nav-item.dropdown .dropdown-menu {
+background-color: #fefefe !important;
+border: 1px solid #ccc !important;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+}
+body.light-mode .nav-item.dropdown .dropdown-menu .dropdown-item {
+color: #222 !important;
+}
+body.light-mode .nav-item.dropdown .dropdown-menu .dropdown-item:hover,
+body.light-mode .nav-item.dropdown .dropdown-menu .dropdown-item.active {
+background-color: #ddd !important;
+color: #111 !important;
+}
+/* Light mode for certificates button */
+body.light-mode .btn-outline-light {
+color: #222 !important;
+border-color: #222 !important;
+}
+body.light-mode .btn-outline-light:hover,
+body.light-mode .btn-outline-light:focus {
+background-color: #222 !important;
+color: #fefefe !important;
+border-color: #222 !important;
+}
+
+/* Light mode progress bars */
+body.light-mode #skills .progress {
+background-color: rgba(0, 0, 0, 0.1) !important;
+}
+body.light-mode #skills .progress-bar {
+background-color: #444 !important;
+color: white !important;
+font-weight: 700;
+text-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+/* Make Academic / Creative buttons smaller in home section */
+#home .btn-view-project {
+max-width: 150px;
+padding: 0.4rem 1rem;
+font-size: 0.9rem;
+}
+.site-footer {
+  background-color: #111;
+  color: #e7e7e7;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.site-footer a {
+  color: #e7e7e7;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.site-footer a:hover {
+  color: #a7a7a7;
+}
+
+/* Light mode footer */
+body.light-mode .site-footer {
+  background-color: #f0f0f0;
+  color: #222;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+body.light-mode .site-footer a {
+  color: #222;
+}
+body.light-mode .site-footer a:hover {
+  color: #555;
+}
+
+
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RR - Portfolio</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- AOS Animation CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+/* Reset & basic */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Poppins', sans-serif;
+background-color: black;
+color: #e7e7e7;
+min-height: 100vh;
+overflow-x: hidden;
+overflow-y: auto;
+padding-top: 100px; /* space for fixed navbar */
+}
+.video-background, .blur {
+pointer-events: none;
+}
+header, nav, nav a, .projects-section, .academic-project-card, .creative-project-card,
+.btn-view-project, #sortSelect, .btn-sort, form button {
+pointer-events: auto;
+}
+.video-background {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+object-fit: cover; z-index: -2; opacity: 0.5;
+}
+.blur {
+height: 0; width: 30rem; position: absolute; top: 20%; right: 0;
+box-shadow: 0 0 700px 15px white; rotate: -30deg; z-index: -1;
+}
+.navbar {
+background: rgba(0, 0, 0, 0.6);
+backdrop-filter: blur(3px);
+padding: 1rem 3rem;
+transition: background 0.3s;
+height: 100px;
+line-height: 100px;
+}
+.navbar:hover { background: rgba(0, 0, 0, 0.8); }
+.navbar-brand { font-size: 2rem; font-weight: 300; color: #e7e7e7; }
+.navbar-nav .nav-link {
+color: #e7e7e7 !important;
+font-weight: 500;
+transition: color 0.2s;
+}
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+color: #a7a7a7 !important;
+font-weight: 600;
+}
+.nav-item.dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu {
+background-color: rgba(0, 0, 0, 0.8);
+border: 1px solid #e7e7e7;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+margin-top: 0;
+}
+.dropdown-item {
+color: #e7e7e7 !important;
+transition: background 0.2s, color 0.2s;
+}
+.dropdown-item:hover,
+.dropdown-item.active {
+background-color: #555 !important;
+color: #a7a7a7 !important;
+}
+.projects-section {
+padding: 6rem 2rem;
+text-align: center;
+position: relative;
+z-index: 1;
+}
+.projects-section h2 {
+font-size: 3rem;
+margin-bottom: 2rem;
+color: #e7e7e7;
+text-shadow: 0 0 10px rgba(255,255,255,0.15);
+font-weight: 400;
+text-align: center;
+}
+.projects-section p {
+font-size: 1.25rem;
+color: grey;
+margin-bottom: 2rem;
+}
+#sortSelect {
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(8px);
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+border-radius: 50px;
+padding: 0.6rem 1.2rem;
+font-size: 1rem;
+font-weight: 500;
+width: 250px;
+transition: all 0.3s ease;
+appearance: none;
+margin-bottom: 3rem;
+cursor: pointer;
+}
+#sortSelect:hover {
+background: rgba(255,255,255,0.1);
+}
+#sortSelect:focus {
+background: rgba(255,255,255,0.1);
+outline: none;
+box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+#sortSelect option {
+background: black;
+color: #e7e7e7;
+}
+.scroll-container {
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+gap: 2rem;
+padding-bottom: 2rem;
+}
+.scroll-container::-webkit-scrollbar { display: none; }
+.academic-project-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: 25px;
+padding: 2rem;
+height: 500px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.academic-project-card:hover {
+transform: scale(1.05);
+box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+.academic-project-card img {
+width: 100%;
+height: 220px;
+object-fit: cover;
+border-radius: 15px;
+margin-bottom: 1rem;
+}
+.academic-project-card .project-title {
+font-size: 1.5rem;
+color: #e7e7e7;
+margin-bottom: 0.5rem;
+}
+.academic-project-card .project-description {
+font-size: 0.95rem;
+color: grey;
+margin-bottom: 1.5rem;
+letter-spacing: 0.05em;
+}
+.creative-project-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: 25px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: 1rem auto;
+padding: 2rem;
+width: 90%;
+max-width: 800px;
+height: 400px;
+box-shadow: 0 0 15px rgba(255,255,255,0.1);
+transition: transform 0.3s, box-shadow 0.3s;
+text-align: left;
+}
+.creative-project-card:hover {
+transform: scale(1.05);
+box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+.creative-project-card img {
+width: 40%;
+height: auto;
+max-height: 100%;
+object-fit: contain;
+border-radius: 5%;
+}
+.project-content {
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: left;
+width: 55%;
+}
+.creative-project-card .project-title {
+font-size: 1.8rem;
+color: #e7e7e7;
+margin-bottom: 1rem;
+}
+.creative-project-card .project-description {
+font-size: 1rem;
+color: grey;
+margin-bottom: 1rem;
+letter-spacing: 0.05em;
+}
+.button-group {
+display: flex;
+gap: 10px;
+justify-content: center;
+width: 100%;
+}
+.btn-view-project {
+background: transparent;
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+padding: 0.5rem 1rem;
+border-radius: 50px;
+font-weight: 500;
+text-decoration: none;
+font-size: 1rem;
+transition: all 0.3s ease;
+flex: 1;
+text-align: center;
+cursor: pointer;
+}
+.btn-view-project:hover {
+background: #e7e7e7;
+color: black;
+transform: translateY(-2px);
+}
+#backToTopBtn {
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.4s ease;
+box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+position: fixed;
+bottom: 1.5rem;
+right: 1.5rem;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+font-size: 20px;
+z-index: 1050;
+background-color: #fff;
+color: black;
+border: none;
+}
+#backToTopBtn.show {
+opacity: 1;
+pointer-events: auto;
+}
+#backToTopBtn:hover {
+transform: scale(1.2);
+box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+cursor: pointer;
+}
+.photos-section {
+padding: 6rem 2rem;
+text-align: center;
+pointer-events: auto;
+position: relative;
+z-index: 1;
+}
+.photos-section h2 {
+font-size: 3rem;
+margin-bottom: 2rem;
+color: #e7e7e7;
+text-shadow: 0 0 10px rgba(255,255,255,0.15);
+font-weight: 400;
+text-align: center;
+}
+.photo-card {
+display: inline-block;
+margin: 1rem;
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(10px);
+border-radius: 15px;
+box-shadow: 0 0 15px rgba(255,255,255,0.1);
+vertical-align: middle;
+overflow: hidden;
+}
+.photo-card img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: 15px;
+display: block;
+}
+.btn-sort {
+background: transparent;
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+padding: 0.5rem 1rem;
+border-radius: 50px;
+font-weight: 500;
+text-decoration: none;
+font-size: 1rem;
+transition: all 0.3s ease;
+margin: 0 0.5rem 1rem 0.5rem;
+cursor: pointer;
+pointer-events: auto;
+user-select: none;
+}
+.btn-sort:hover {
+background: #e7e7e7;
+color: black;
+transform: translateY(-2px);
+}
+/* Skills Section with animation */
+#skills .progress {
+height: 25px;
+border-radius: 15px;
+margin-bottom: 1rem;
+background: rgba(255,255,255,0.1);
+overflow: visible;
+}
+#skills .progress-bar {
+font-weight: 600;
+color: black;
+width: 0;
+animation: progFill 2s forwards;
+}
+@keyframes progFill {
+to { width: var(--progress-width); }
+}
+#skills .certificates-container {
+max-width: 700px;
+margin: auto;
+text-align: left;
+}
+#skills .certificates-container ul {
+list-style: none;
+padding-left: 1rem;
+}
+#skills .certificates-container ul li {
+padding: 0.4rem 0;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+/* Contact */
+#contact {
+padding: 6rem 2rem;
+text-align: center;
+position: relative;
+z-index: 1;
+}
+#contact h2 {
+font-size: 3rem;
+margin-bottom: 2rem;
+color: #e7e7e7;
+text-shadow: 0 0 10px rgba(255,255,255,0.15);
+font-weight: 400;
+}
+#contact form {
+max-width: 600px;
+margin: auto;
+text-align: left;
+}
+#contact label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 600;
+}
+#contact input, #contact textarea {
+width: 100%;
+padding: 0.75rem 1rem;
+margin-bottom: 1.5rem;
+border-radius: 10px;
+border: none;
+background: rgba(255,255,255,0.1);
+color: #e7e7e7;
+font-size: 1rem;
+resize: vertical;
+}
+#contact input:focus, #contact textarea:focus {
+outline: none;
+box-shadow: 0 0 10px #e7e7e7;
+background: rgba(255,255,255,0.15);
+}
+#contact button {
+background-color: transparent;
+border: 1px solid #e7e7e7;
+color: #e7e7e7;
+padding: 0.7rem 2rem;
+border-radius: 50px;
+font-weight: 600;
+font-size: 1.1rem;
+transition: all 0.3s ease;
+}
+#contact button:hover {
+background-color: #e7e7e7;
+color: black;
+transform: translateY(-3px);
+cursor: pointer;
+}
+.error-message {
+color: #ff6b6b;
+margin-top: -1rem;
+margin-bottom: 1rem;
+font-size: 0.9rem;
+display: none;
+}
+
+/* Light Mode styles */
+body.light-mode {
+background-color: #fefefe;
+color: #222;
+pointer-events: auto;
+position: relative;
+}
+body.light-mode::before {
+content: "";
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background: url('https://i.makeagif.com/media/3-03-2015/frt5dl.gif') no-repeat center center fixed;
+background-size: cover;
+opacity: 0.12;
+z-index: -1;
+pointer-events: none;
+}
+/* Gray stuff darker in light mode */
+body.light-mode .projects-section p,
+body.light-mode .academic-project-card .project-description,
+body.light-mode .creative-project-card .project-description,
+body.light-mode .projects-section .btn-sort,
+body.light-mode .photos-section h2,
+body.light-mode .btn-sort,
+body.light-mode .error-message,
+body.light-mode #contact label {
+color: #444 !important;
+text-shadow: none !important;
+}
+body.light-mode .projects-section h2,
+body.light-mode #contact h2 {
+color: #222 !important;
+text-shadow: none !important;
+}
+body.light-mode .navbar {
+background: rgba(255, 255, 255, 0.8);
+backdrop-filter: none;
+}
+body.light-mode .navbar:hover {
+background: rgba(255, 255, 255, 1);
+}
+body.light-mode .navbar-brand,
+body.light-mode .nav-link,
+body.light-mode .dropdown-item {
+color: #222 !important;
+}
+body.light-mode .nav-link:hover,
+body.light-mode .nav-link.active,
+body.light-mode .dropdown-item:hover,
+body.light-mode .dropdown-item.active {
+color: #555 !important;
+}
+body.light-mode .academic-project-card,
+body.light-mode .creative-project-card,
+body.light-mode .photo-card {
+background: rgba(0, 0, 0, 0.05);
+backdrop-filter: none;
+color: #222;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .btn-view-project {
+border-color: #222;
+color: #222;
+}
+body.light-mode .btn-view-project:hover {
+background: #222;
+color: #fefefe;
+}
+body.light-mode #sortSelect {
+background: rgba(0,0,0,0.05);
+color: #222;
+border-color: #222;
+}
+body.light-mode #sortSelect:hover,
+body.light-mode #sortSelect:focus {
+background: rgba(0,0,0,0.1);
+}
+body.light-mode #backToTopBtn {
+background-color: #222;
+color: white;
+}
+body.light-mode #backToTopBtn:hover {
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+/* Mode toggle button */
+.mode-toggle-btn {
+background: transparent;
+border: none;
+font-size: 1.8rem;
+cursor: pointer;
+color: #e7e7e7;
+margin-left: 1rem;
+padding: 0;
+user-select: none;
+transition: color 0.3s ease;
+}
+.mode-toggle-btn:hover,
+.mode-toggle-btn:focus {
+color: #ccc;
+outline: none;
+}
+body.light-mode .mode-toggle-btn {
+color: #222;
+}
+body.light-mode .mode-toggle-btn:hover,
+body.light-mode .mode-toggle-btn:focus {
+color: #555;
+}
+/* Light mode dropdown fixes */
+body.light-mode .nav-item.dropdown .dropdown-menu {
+background-color: #fefefe !important;
+border: 1px solid #ccc !important;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+}
+body.light-mode .nav-item.dropdown .dropdown-menu .dropdown-item {
+color: #222 !important;
+}
+body.light-mode .nav-item.dropdown .dropdown-menu .dropdown-item:hover,
+body.light-mode .nav-item.dropdown .dropdown-menu .dropdown-item.active {
+background-color: #ddd !important;
+color: #111 !important;
+}
+/* Light mode for certificates button */
+body.light-mode .btn-outline-light {
+color: #222 !important;
+border-color: #222 !important;
+}
+body.light-mode .btn-outline-light:hover,
+body.light-mode .btn-outline-light:focus {
+background-color: #222 !important;
+color: #fefefe !important;
+border-color: #222 !important;
+}
+
+/* Light mode progress bars */
+body.light-mode #skills .progress {
+background-color: rgba(0, 0, 0, 0.1) !important;
+}
+body.light-mode #skills .progress-bar {
+background-color: #444 !important;
+color: white !important;
+font-weight: 700;
+text-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+/* Make Academic / Creative buttons smaller in home section */
+#home .btn-view-project {
+max-width: 150px;
+padding: 0.4rem 1rem;
+font-size: 0.9rem;
+}
+
+/* Light mode "Send Message" button styles */
+body.light-mode #contact button {
+  background-color: transparent;
+  border: 1px solid #222;
+  color: #222;
+  transition: all 0.3s ease;
+}
+body.light-mode #contact button:hover {
+  background-color: #222;
+  color: #fefefe;
+}
+
+.logo-dark {
+  display: inline-block;
+}
+.logo-light {
+  display: none;
+}
+
+body.light-mode .logo-dark {
+  display: none !important;
+}
+body.light-mode .logo-light {
+  display: inline-block !important;
+}
+
+body.light-mode .film-project-title,
+body.light-mode .film-project-description {
+  color: #222 !important; /* dark text for light mode */
+}
+
+body.light-mode .film-btn-view-project {
+  color: #222 !important;
+  border-color: #222 !important;
+}
+
+body.light-mode .film-btn-view-project:hover {
+  background-color: #222 !important;
+  color: #fefefe !important;
+}
+
+#academic-projects {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#projectContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+/* Default dark mode */
+.project-card .project-title {
+  color: #e7e7e7;
+}
+
+/* Light mode override */
+body.light-mode .project-card .project-title {
+  color: #222 !important; /* dark text in light mode */
+}
+
+body.light-mode .project-card .project-description {
+  color: #444 !important; /* darker gray for description */
+}
+
+body.light-mode .btn-view-project {
+  color: #222 !important;
+  border-color: #222 !important;
+}
+
+body.light-mode .btn-view-project:hover {
+  background-color: #222 !important;
+  color: #fefefe !important;
+}
+</style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarContent" data-bs-offset="100" tabindex="0">
+
+<!-- Back to Top Button -->
+<button type="button" id="backToTopBtn" class="btn btn-light position-fixed bottom-0 end-0 m-4 shadow">↑</button>
+
+<!-- Background -->
+<img src="https://media.sellfy.com/images/KjQ3rNHl/g0Ev/preview.gif" alt="Background GIF" class="video-background" />
+<div class="blur"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container-fluid" id="navbarNavDropdown">
+  <a class="navbar-brand" href="#home">
+    <img src="https://i.imgur.com/WiidUVp.png" alt="RR Logo Dark" class="logo-dark" style="height: 150px;">
+    <img src="https://i.imgur.com/zImhuHZ.png" alt="RR Logo Light" class="logo-light" style="height: 150px; display: none;">
+  </a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" >
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+<ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsDropdown">
+<li><a class="dropdown-item" href="#academic-projects">Academic Projects</a></li>
+<li><a class="dropdown-item" href="#creative-projects">Creative Projects</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+<button id="modeToggle" aria-label="Toggle light and dark mode" class="mode-toggle-btn" title="Toggle light and dark mode">🌙</button>
+</div>
+</div>
+</nav>
+
+<!-- Home Section -->
+<section id="home" class="projects-section" data-aos="fade-up">
+<h2>안녕, I am Rafael Saliganan</h2>
+<p>Welcome to a space where creativity meets innovation...</p>
+<div class="button-group" data-aos="fade-up" data-aos-delay="300">
+<a href="#academic-projects" class="btn-view-project">Academic</a>
+<a href="#creative-projects" class="btn-view-project">Creative</a>
+</div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="projects-section" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2rem; text-align:left;" data-aos="fade-up">
+<div style="flex:1; min-width:280px; max-width:400px;">
+<img src="https://i.imgur.com/aBcZluX.jpeg" alt="Rafael Saliganan" style="width:100%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.2);" />
+</div>
+<div style="flex:1; min-width:280px; max-width:600px;">
+<h2>About Me</h2>
+<p>Hello! I'm Rafael Saliganan, a passionate creative and developer who loves blending technology with art to build meaningful projects.
+
+  With a background in programming and filmmaking, I thrive in problem-solving and storytelling.</p>
+</div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="projects-section" data-aos="fade-up">
+<h2>Skills</h2>
+<div style="max-width:700px; margin:auto; text-align:left;">
+<label for="skill1" class="form-label">Film &amp; Graphic Design</label>
+<div class="progress" id="skill1">
+<div class="progress-bar bg-light" role="progressbar" style="--progress-width:90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+</div>
+<label for="skill2" class="form-label">Photography</label>
+<div class="progress" id="skill2">
+<div class="progress-bar bg-light" role="progressbar" style="--progress-width:80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+</div>
+<label for="skill3" class="form-label">HTML</label>
+<div class="progress" id="skill3">
+<div class="progress-bar bg-light" role="progressbar" style="--progress-width:85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+</div>
+<label for="skill4" class="form-label">Java</label>
+<div class="progress" id="skill4">
+<div class="progress-bar bg-light" role="progressbar" style="--progress-width:75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+</div>
+</div>
+<div class="certificates-container" style="max-width:700px; margin:auto; text-align:left; margin-top:2rem;">
+<button class="btn btn-outline-light w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#certificates" aria-expanded="false" aria-controls="certificates"> Achievements</button>
+<div class="collapse" id="certificates">
+<ul class="list-group list-group-flush text-light">
+<li class="list-group-item bg-transparent border-light">1st Place MSFF 2024 - International School of Manila</li>
+<li class="list-group-item bg-transparent border-light">NSPC QUALIFIER (Online Publishing, Filipino) -
+  Cebu, Carcar</li>
+<li class="list-group-item bg-transparent border-light">2nd Place MIL SUMMIT 2023 (1st round)- UP DILIMAN</li>
+<li class="list-group-item bg-transparent border-light">5th Place MIL SUMMIT 2023 (2nd round) - UP DILIMAN</li>
+<li class="list-group-item bg-transparent border-light">5th Place ECONVERGENCE 2024 - UP LOS BAÑOS</li>
+<li class="list-group-item bg-transparent border-light">1st Place RSPC (Online Publishing, Filipino)</li>
+<li class="list-group-item bg-transparent border-light">1st Place DSPC (Online Publishing, Filipino)</li>
+<li class="list-group-item bg-transparent border-light">Best Film - English Month Film Festival</li>
+<li class="list-group-item bg-transparent border-light">Best film - BES Intramurals Film Competition</li>
+<li class="list-group-item bg-transparent border-light">Best Teaser - SHS INTRAMURALS 2023</li>
+<li class="list-group-item bg-transparent border-light">Best Film (ABM) - KWENTO Film Festival 2023</li>
+<li class="list-group-item bg-transparent border-light">1st Place - Immersion Video Competition</li>
+<li class="list-group-item bg-transparent border-light"> 1st Place (Tiktok Competition) - ABM National Convergence 2023</li>
+<li class="list-group-item bg-transparent border-light">1st Place - Immersion Video Competition</li>
+<li class="list-group-item bg-transparent border-light">2nd Place (Teaser) - BES INTRAMURALS 2023</li>
+<li class="list-group-item bg-transparent border-light">3rd Place (Film) - Foundation @59 Short Film Competition</li>
+<li class="list-group-item bg-transparent border-light">Gold Medalist - Service Award</li>
+<li class="list-group-item bg-transparent border-light">Gold Medalist - Talent Award in Creative Arts</li>
+<li class="list-group-item bg-transparent border-light">LENTE LIKHA PRODUCTIONS A.Y 2022 - 2023 - P.I.O</li>
+<li class="list-group-item bg-transparent border-light">LENTE LIKHA PRODUCTIONS A.Y 2023 - 2024 - Auditor</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- Academic Projects Section -->
+<section id="academic-projects" class="projects-section" data-aos="fade-up">
+  <h2>Academic Projects</h2>
+  <div class="mb-4">
+    <select id="sortSelect" onchange="sortProjects()">
+      <option value="">Sort by Category</option>
+      <option value="First Grading">First Grading</option>
+      <option value="Midterms">Midterms</option>
+      <option value="Finals">Finals</option>
+    </select>
+  </div>
+    <div id="projectContainer">
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/dkIOxuA.png" alt="Lab Exercise 1A">
+        <div class="project-title">Lab Exercise 1A</div>
+      
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1p5djDpCpJneEl4F7HhOQSLTCY6I47lZh/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/LabExercise1A.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/pvVoIQs.png" alt="Lab Exercise 2">
+        <div class="project-title">Lab Exercise 2</div>
+     
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1dLdJ79mnpuzkz472N1FykIC3DTnikFyP/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/LAB Exercise 2.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/mKdRVOB.png" alt="Lab Exercise 3">
+        <div class="project-title">Lab Exercise 3</div>
+  
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1MbeOc4YJQV-R0dsaa8CwJroJ9KVbj7yE/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/Lab Exercise 3.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/KDZz7nv.png" alt="Lab Exercise 4">
+        <div class="project-title">Lab Exercise 4</div>
+     
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1jaeq27Qmkl3SPJBhWoOEO4Wm9Tu1qvIf/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/Saliganan_LabExer4.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/s5Obisa.png" alt="Lab Exercise 5">
+        <div class="project-title">Lab Exercise 5</div>
+ 
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1Nq9YOMwlC1VhS2yScDzAhqt3uA5NEXiE/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/Saliganan_LabExer5.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/5N4UFBi.png" alt="Lab Exercise 6">
+        <div class="project-title">Lab Exercise 6</div>
+       
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1mNEDCCZFLRtZmJfJavrAEcPwUlJna_Ab/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/Saliganan_Exer6 (2).html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="First Grading">
+        <img src="https://i.imgur.com/3VCt5hd.png" alt="Lab Exercise 7">
+        <div class="project-title">Lab Exercise 7</div>
+    
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1LmxjJ-pIXGbrqD2t04Dp24-5JQG1zAXI/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="First Grading/Saliganan_LabExer7.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="Midterms">
+        <img src="https://i.imgur.com/Jva1qUs.png" alt="Exercise CCS 1">
+        <div class="project-title">Exercise CCS 1</div>
+      
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1UhN_SrkPrf8eIGnqxh41uaqhp5Ii0Y7b/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="Midterms/ExerciseCSS1.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="Midterms">
+        <img src="https://i.imgur.com/naxSx1y.png" alt="Exercise CCS 2">
+        <div class="project-title">Exercise CCS 2</div>
+
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1MUybmuuo-Umyq6yGS2bCPHCC1atucyRa/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="Midterms/ExerciseCSS2.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="Midterms">
+        <img src="https://i.imgur.com/wfQbrwx.png" alt="Exercise CCS 2a">
+        <div class="project-title">Exercise CCS 2a</div>
+      
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/19pEMfB9wXeRiLRar0JZwmG9PM-zK6FRO/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="Midterms/ExerciseCSS2a.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="Midterms">
+        <img src="https://i.imgur.com/pyK65d5.png" alt="Exercise CCS 2b">
+        <div class="project-title">Exercise CCS 2b</div>
+ 
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/14mYeEm7Rj-p-ijf8gSkvHa5fuTRknDAa/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="Midterms/ExerciseCSS2b.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="Midterms">
+        <img src="https://i.imgur.com/zEcSm1w.png" alt="Exercise CCS 3">
+        <div class="project-title">Exercise CCS 3</div>
+       
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1EJuhl419IJUlFewUZFX9A2B6qbczPckS/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="Midterms/ExerciseCSS3.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+      <div class="project-card" data-category="Midterms">
+        <img src="https://i.imgur.com/hnrm9fH.png" alt="Exercise CCS 4">
+        <div class="project-title">Exercise CCS 4</div>
+   
+        <div class="button-group">
+          <a href="https://drive.google.com/file/d/1m1Tuivik64DJqnbfKj2vPIFu1iFtnTiP/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+          <a href="Midterms/ExerciseCSS4.html" target="_blank" class="btn-view-project">View Output</a>
+        </div>
+      </div>
+   
+
+    <div class="project-card" data-category="Finals">
+      <img src="https://i.imgur.com/yyJeox0.png" alt="Lab Activity 1 ">
+      <div class="project-title">Lab Activity 1</div>
+
+      <div class="button-group">
+        <a href="https://drive.google.com/file/d/1m1Tuivik64DJqnbfKj2vPIFu1iFtnTiP/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+        <a href="Finals/act1final.html" target="_blank" class="btn-view-project">View Output</a>
+      </div>
+    </div>
+
+
+  <div class="project-card" data-category="Finals">
+    <img src="https://i.imgur.com/uSJ4fK3.png" alt="Lab Activity 2 ">
+    <div class="project-title">Lab Activity 2</div>
+
+    <div class="button-group">
+      <a href="https://drive.google.com/file/d/1ItZVLF6sHrPL7soa9_4zpVK6wjK6NpA1/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+      <a href="Finals/labActivity2.html" target="_blank" class="btn-view-project">View Output</a>
+    </div>
+  </div>
+
+  
+  <div class="project-card" data-category="Finals">
+    <img src="https://i.imgur.com/PBYxKhI.png" alt="Lab Activity 3 ">
+    <div class="project-title">Lab Activity 3</div>
+
+    <div class="button-group">
+      <a href="https://drive.google.com/file/d/1aB5nOzxRbFfC4DOyR_fgNxpNcNsffYGQ/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+      <a href="Finals/labActivity3.html" target="_blank" class="btn-view-project">View Output</a>
+    </div>
+  </div>
+
+  
+  <div class="project-card" data-category="Finals">
+    <img src="https://i.imgur.com/byQNZFd.png" alt="Lab Activity 3 ">
+    <div class="project-title">Lab Activity 4</div>
+
+    <div class="button-group">
+      <a href="https://drive.google.com/file/d/1tg_c6XssIsuwIz_YEK0NmiSaYeqTeDEJ/view?usp=drive_link" target="_blank" class="btn-view-project">View Code</a>
+      <a href="Finals/labActivity4.html" target="_blank" class="btn-view-project">View Output</a>
+    </div>
+  </div>
+</section>
+
+<!-- Creative Projects Section - Films Carousel -->
+<section id="creative-projects" class="projects-section" data-aos="fade-up">
+  <h2>Films</h2>
+  <div id="creativeProjectsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-wrap="true">
+    <div class="carousel-inner">
+
+      <!-- First Film -->
+      <div class="carousel-item active">
+        <div class="film-card">
+          <img src="https://a.ltrbxd.com/resized/film-poster/1/1/6/3/0/3/7/1163037-kaleidoscope-0-2000-0-3000-crop.jpg?v=99a63d3602" alt="Kaleidoscope" />
+          <div class="film-project-content">
+            <div class="film-project-title">Kaleidoscope</div>
+            <div class="film-project-description">DIRECTED BY: Rafael Saliganan</div>
+            <div class="film-project-description">Two broken pieces from the same broken glass cascading upon a kaleidoscope of events...</div>
+            <div class="film-button-group">
+              <a href="https://youtu.be/8iJUs4CWboI?si=M1mcE_0tK-ay3kFG" target="_blank" class="film-btn-view-project">Watch Film</a>
+              <a href="https://letterboxd.com/film/kaleidoscope-2024-1/" target="_blank" class="film-btn-view-project">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Film -->
+      <div class="carousel-item">
+        <div class="film-card">
+          <img src="https://a.ltrbxd.com/resized/film-poster/1/1/6/3/0/3/6/1163036-chasing-a-star-0-2000-0-3000-crop.jpg?v=199a6e589c" alt="Chasing A Star" />
+          <div class="film-project-content">
+            <div class="film-project-title">Chasing A Star</div>
+            <div class="film-project-description">DIRECTED BY: Rafael Saliganan</div>
+            <div class="film-project-description">All his life he’s been chasing a star, forgetting that all he could do is to just stare...</div>
+            <div class="film-button-group">
+              <a href="https://youtu.be/3rSi58zUjvQ?si=WwMf27cgX7niwian" target="_blank" class="film-btn-view-project">Watch Film</a>
+              <a href="https://letterboxd.com/film/chasing-a-star/" target="_blank" class="film-btn-view-project">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Third Film -->
+      <div class="carousel-item">
+        <div class="film-card">
+          <img src="https://a.ltrbxd.com/resized/film-poster/1/1/6/4/8/1/5/1164815-his-achilles-heel-0-2000-0-3000-crop.jpg?v=a4a4e79273" alt="His Achilles Heel" />
+          <div class="film-project-content">
+            <div class="film-project-title">His Achilles Heel</div>
+            <div class="film-project-description">DIRECTED BY: Rafael Saliganan</div>
+            <div class="film-project-description">Two beating hearts are attempting to fight their way out of dissatisfaction...</div>
+            <div class="film-button-group">
+              <a href="https://youtu.be/Y2N-5BgoYeA?si=EYsoAsLZ7m7cCgxI" target="_blank" class="film-btn-view-project">Watch Film</a>
+              <a href="https://letterboxd.com/film/his-achilles-heel/" target="_blank" class="film-btn-view-project">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fourth Film -->
+      <div class="carousel-item">
+        <div class="film-card">
+          <img src="https://a.ltrbxd.com/resized/film-poster/1/2/9/4/6/8/3/1294683-the-last-supper-2023-1-0-2000-0-3000-crop.jpg?v=b6c6569c40" alt="The Last Supper" />
+          <div class="film-project-content">
+            <div class="film-project-title">The Last Supper</div>
+            <div class="film-project-description">DIRECTED BY: Rafael Saliganan</div>
+            <div class="film-project-description">Maria, desperate to escape the grip of poverty, accepts an offer from a mysterious man...</div>
+            <div class="film-button-group">
+              <a href="https://youtu.be/eBP3KWETibs?si=DemjIGfdi25ahI4x" target="_blank" class="film-btn-view-project">Watch Film</a>
+              <a href="https://letterboxd.com/film/the-last-supper-2023-1/" target="_blank" class="film-btn-view-project">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fifth Film -->
+      <div class="carousel-item">
+        <div class="film-card">
+          <img src="https://i.imgur.com/BiLmIiD.jpeg" alt="Kalye Alpas" />
+          <div class="film-project-content">
+            <div class="film-project-title">Kalye Alpas</div>
+            <div class="film-project-description">DIRECTED BY: Janine Baquiran</div>
+            <div class="film-project-description">CINEMATOGRAPHED BY: Rafael Saliganan</div>
+            <div class="film-project-description">Sebastian (Baste), Anthony, and Patricia consider themselves family by heart as they have known each other since childhood...</div>
+            <div class="film-button-group">
+              <a href="https://www.facebook.com/share/v/18nctRGHkV/" target="_blank" class="film-btn-view-project">Watch Film</a>
+              <a href="https://www.facebook.com/share/v/18nctRGHkV/" target="_blank" class="film-btn-view-project">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sixth Film -->
+      <div class="carousel-item">
+        <div class="film-card">
+          <img src="https://i.imgur.com/G7tqBeA.jpeg" alt="Padbungan" />
+          <div class="film-project-content">
+            <div class="film-project-title">Padbungan</div>
+            <div class="film-project-description">DIRECTED BY: Rafael Saliganan</div>
+            <div class="film-project-description">
+              With an enraged outlook, the youth of this time and age would rather regard the world as the cruelest place possible to their kind...</div>
+            <div class="film-button-group">
+              <a href="https://youtu.be/tGpKKxSdCFg?si=X8gcSDqIxQzGRIf7" target="_blank" class="film-btn-view-project">Watch Film</a>
+              <a href="https://www.facebook.com/watch/?v=146588751535323" target="_blank" class="film-btn-view-project">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#creativeProjectsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#creativeProjectsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+<!-- Other Creative Works - Photo Gallery Section -->
+<section class="photos-section" data-aos="fade-up">
+  <h2>Other Creative Works</h2>
+
+  <!-- Buttons for filtering -->
+  <div class="button-group">
+    <button class="btn-sort" id="dreamyBtn">B&W - Photograph</button>
+    <button class="btn-sort" id="bwBtn">Dreamy - Photograph</button>
+    <button class="btn-sort" id="sceneryBtn">Graphic Design</button>
+  </div>
+
+  <!-- Photo Gallery -->
+  <div class="row row-cols-1 row-cols-md-3 g-4" id="photoGallery">
+
+    <!-- Dreamy Photos -->
+    <div class="col">
+      <div class="photo-card dreamy">
+        <img src="https://i.imgur.com/HsV5Oe5.jpeg" alt="Dreamy Photo 1">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card dreamy">
+        <img src="https://i.imgur.com/8IT4AjR.jpeg" alt="Dreamy Photo 2">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card dreamy">
+        <img src="https://i.imgur.com/mg5tnMK.jpeg" alt="Dreamy Photo 3">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card dreamy">
+        <img src="https://i.imgur.com/GfAnuY3.jpeg" alt="Dreamy Photo 4">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card dreamy">
+        <img src="https://i.imgur.com/gKlHyjQ.jpeg" alt="Dreamy Photo 5">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card dreamy">
+        <img src="https://i.imgur.com/7FdmqB8.jpeg" alt="Dreamy Photo 6">
+      </div>
+    </div>
+
+    <!-- B&W Photos -->
+    <div class="col">
+      <div class="photo-card bw">
+        <img src="https://i.imgur.com/Jnqjc8J.jpeg" alt="B&W Photo 1">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card bw">
+        <img src="https://i.imgur.com/qMapSSp.jpeg" alt="B&W Photo 2">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card bw">
+        <img src="https://i.imgur.com/jPPcLh6.jpeg" alt="B&W Photo 3">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card bw">
+        <img src="https://i.imgur.com/zmhUnLu.jpeg" alt="B&W Photo 4">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card bw">
+        <img src="https://i.imgur.com/OC470CN.jpeg" alt="B&W Photo 5">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card bw">
+        <img src="https://i.imgur.com/Y2W53zl.jpeg" alt="B&W Photo 6">
+      </div>
+    </div>
+
+    <!-- Graphic Design / Scenery -->
+    <div class="col">
+      <div class="photo-card scenery">
+        <img src="https://i.imgur.com/c39IS56.jpeg" alt="Scenery Photo 1">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card scenery">
+        <img src="https://i.imgur.com/x7mJ4aj.jpeg" alt="Scenery Photo 2">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card scenery">
+        <img src="https://i.imgur.com/uo99X0c.jpeg" alt="Scenery Photo 3">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card scenery">
+        <img src="https://i.imgur.com/gzh3BVr.jpeg" alt="Scenery Photo 4">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card scenery">
+        <img src="https://i.imgur.com/F19tNRw.jpeg" alt="Scenery Photo 5">
+      </div>
+    </div>
+    <div class="col">
+      <div class="photo-card scenery">
+        <img src="https://i.imgur.com/LJ37LOj.jpeg" alt="Scenery Photo 6">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="projects-section" data-aos="fade-up">
+<h2>Contact Me</h2>
+<form id="contactForm" novalidate>
+<label for="name">Name *</label>
+<input type="text" id="name" name="name" placeholder="Your name" required minlength="2" />
+<div class="error-message" id="nameError">Please enter at least 2 characters.</div>
+<label for="email">Email *</label>
+<input type="email" id="email" name="email" placeholder="you@example.com" required />
+<div class="error-message" id="emailError">Please enter a valid email address.</div>
+<label for="message">Message *</label>
+<textarea id="message" name="message" rows="5" placeholder="Your message" required minlength="10"></textarea>
+<div class="error-message" id="messageError">Please enter at least 10 characters.</div>
+<button type="submit">Send Message</button>
+</form>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+duration: 1000,
+once: true,
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+const modeToggleBtn = document.getElementById('modeToggle');
+if (localStorage.getItem('mode') === 'light') {
+document.body.classList.add('light-mode');
+modeToggleBtn.textContent = '🌞';
+} else {
+modeToggleBtn.textContent = '🌙';
+}
+modeToggleBtn.addEventListener('click', () => {
+document.body.classList.toggle('light-mode');
+if(document.body.classList.contains('light-mode')){
+modeToggleBtn.textContent = '🌞';
+localStorage.setItem('mode', 'light');
+} else {
+modeToggleBtn.textContent = '🌙';
+localStorage.setItem('mode', 'dark');
+}
+});
+
+// Your other JS functions (sorting, animations, form validations)...
+window.sortProjects = function () {
+  const sortValue = document.getElementById("sortSelect").value;
+  document.querySelectorAll("#projectContainer .project-card").forEach(project => {
+    project.style.display = (sortValue === "" || project.dataset.category === sortValue) ? "block" : "none";
+  });
+};
+
+// Animate skill bars
+const progressBars = document.querySelectorAll("#skills .progress-bar");
+function animateBars() {
+progressBars.forEach(bar => {
+const rect = bar.getBoundingClientRect();
+if (rect.top < window.innerHeight && rect.bottom >= 0 && !bar.classList.contains("animated")) {
+bar.style.animationPlayState = "running";
+bar.classList.add("animated");
+}
+});
+}
+progressBars.forEach(bar => {
+bar.style.width = "0";
+bar.style.animationPlayState = "paused";
+});
+window.addEventListener("scroll", animateBars);
+animateBars();
+
+// Photo gallery filters
+function filterPhotos(classification) {
+document.querySelectorAll(".photo-card").forEach(photo => {
+photo.style.display = classification === "all" || photo.classList.contains(classification) ? "block" : "none";
+});
+}
+document.getElementById("dreamyBtn").addEventListener("click", () => filterPhotos("dreamy"));
+document.getElementById("bwBtn").addEventListener("click", () => filterPhotos("bw"));
+document.getElementById("sceneryBtn").addEventListener("click", () => filterPhotos("scenery"));
+
+// Form validation ...
+const form = document.getElementById("contactForm");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+const nameError = document.getElementById("nameError");
+const emailError = document.getElementById("emailError");
+const messageError = document.getElementById("messageError");
+
+function isValidEmail(email) {
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener("submit", (e) => {
+e.preventDefault();
+let valid = true;
+
+if(nameInput.value.trim().length < 2) {
+nameError.style.display = "block";
+valid = false;
+} else {
+nameError.style.display = "none";
+}
+
+if(!isValidEmail(emailInput.value.trim())) {
+emailError.style.display = "block";
+valid = false;
+} else {
+emailError.style.display = "none";
+}
+
+if(messageInput.value.trim().length < 10) {
+messageError.style.display = "block";
+valid = false;
+} else {
+messageError.style.display = "none";
+}
+
+if(valid) {
+alert("Thank you! Your message has been sent.");
+form.reset();
+}
+});
+
+// Back to top button
+const backToTopBtn = document.getElementById('backToTopBtn');
+window.addEventListener('scroll', () => {
+if(window.scrollY > 200) {
+backToTopBtn.classList.add('show');
+} else {
+backToTopBtn.classList.remove('show');
+}
+});
+backToTopBtn.addEventListener('click', () => {
+window.scrollTo({top: 0, behavior: "smooth"});
+});
+});
+</script>
+<!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // animation duration in milliseconds
+    once: true, // whether animation should happen only once when scrolling down
+  });
+</script>
+</body>
+
+<body data-bs-spy="scroll" data-bs-target="#navbarContent" data-bs-offset="100" tabindex="0">
+  <footer class="site-footer">
+    <span>&copy; 2024 Rafael Saliganan</span>
+    <a href="https://github.com/littlemo87" target="_blank" rel="noopener"><i class="bi bi-github"></i></a>
+    <a href="https://www.youtube.com/@littlemo1838" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>
+    <a href="https://www.instagram.com/rafportfolio_/" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
+  </footer>
+
+
+</body>
+</html>
+

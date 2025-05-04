@@ -1,0 +1,22 @@
+.class1 a:link {
+    text-decoration: underline;
+    color: red;
+  }
+  
+
+  .class1 a:visited {
+    text-decoration: line-through;
+    color: yellow;
+  }
+  
+ 
+  .class1 a:hover {
+    text-decoration: none; 
+    color: blue;
+  }
+  
+
+  .class1 a:active {
+    text-decoration: overline;
+    color: green;
+  }

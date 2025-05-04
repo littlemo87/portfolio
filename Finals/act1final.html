@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rafael Saliganan's Calculator</title>
+    <script>
+        function getValues() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            return [num1, num2];
+        }
+
+        function add() {
+            const [num1, num2] = getValues();
+            document.getElementById("result").textContent = "Result: " + (num1 + num2);
+        }
+
+        function sub() {
+            const [num1, num2] = getValues();
+            document.getElementById("result").textContent = "Result: " + (num1 - num2);
+        }
+
+        function mul() {
+            const [num1, num2] = getValues();
+            document.getElementById("result").textContent = "Result: " + (num1 * num2);
+        }
+
+        function div() {
+            const [num1, num2] = getValues();
+            document.getElementById("result").textContent = "Result: " + (num1 / num2);
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .inputs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            background-color: #d8800d;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #bb8f54;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Rafael Saliganan's Calculator</h2>
+        <div class="inputs">
+            <input type="text" id="num1" placeholder="Number 1">
+            <input type="text" id="num2" placeholder="Number 2">
+        </div>
+        <div>
+            <button onclick="add()">Add</button>
+            <button onclick="sub()">Subtract</button>
+            <button onclick="mul()">Multiply</button>
+            <button onclick="div()">Divide</button>
+        </div>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
