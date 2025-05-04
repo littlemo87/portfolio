@@ -18,6 +18,73 @@
 
 
 <style>
+/* Mobile navbar fix */
+@media (max-width: 767.98px) {
+  /* Navbar container */
+  .navbar {
+    height: auto !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+  
+  /* Navbar toggler smaller */
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem !important;
+    border: none !important;
+    font-size: 1.2rem !important;
+  }
+  
+  /* Nav links container */
+  .navbar-collapse {
+    padding: 0.2rem 1rem !important;
+  }
+  
+  /* Nav links */
+  .navbar-nav .nav-link {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    text-align: center;
+  }
+  
+  /* Fix any margin on nav items */
+  .navbar-nav .nav-item {
+    margin: 0 !important;
+  }
+}
+  .film-card img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    border-radius: 25px;
+    margin-bottom: 1rem;
+  }
+  .film-project-content {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+  .film-button-group {
+    justify-content: center;
+  }
+}
+
+.navbar-nav {
+  width: 100%;
+}
+
+.navbar-collapse {
+  background-color: rgba(0, 0, 0, 0.8); /* match navbar bg */
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.navbar-collapse.collapsing,
+.navbar-collapse.show {
+  display: block !important;
+}
 
 .film-card {
   background: rgba(255, 255, 255, 0.05);
