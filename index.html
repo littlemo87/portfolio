@@ -19,6 +19,47 @@
 
 <style>
 
+    @media (max-width: 767.98px) {
+  /* Position the toggle button inside the navbar, aligned right */
+  #modeToggle {
+    position: absolute;
+    top: 10px; /* adjust as needed */
+    right: 20px; /* adjust as needed */
+    z-index: 1051; /* above navbar to stay visible */
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+
+@media (max-width: 767.98px) {
+  /* Reduce navbar height and padding */
+  .navbar {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    height: auto !important;
+  }
+
+  /* Smaller toggle button */
+  .navbar-toggler {
+    padding: 0.2rem 0.3rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Navbar links - smaller font size and padding */
+  .navbar-nav .nav-link {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Adjust logo size if needed */
+  .navbar-brand img {
+    height: 80px !important; /* or a smaller value */
+  }
+}
+
 @media (max-width: 768px) {
   .film-card {
     flex-direction: column !important; /* stack image and content vertically */
@@ -884,6 +925,27 @@ body.light-mode .site-footer a:hover {
   color: #555;
 }
 
+/* Light Mode: Make all text within #about section dark */
+body.light-mode #about {
+  color: #000; /* default text color */
+}
+
+/* Override text elements inside #about */
+body.light-mode #about h2,
+body.light-mode #about p,
+body.light-mode blockquote {
+  color: #000 !important;
+}
+
+/* Override icon colors if using Bootstrap icons or custom icons */
+body.light-mode #about i {
+  color: #000 !important;
+}
+
+/* Optional: if you want to make all nested span and other text elements black */
+body.light-mode #about * {
+  color: #000 !important;
+}
 
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
@@ -1576,17 +1638,35 @@ body.light-mode .btn-view-project:hover {
 </section>
 
 <!-- About Section -->
-<section id="about" class="projects-section" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2rem; text-align:left;" data-aos="fade-up">
-<div style="flex:1; min-width:280px; max-width:400px;">
-<img src="https://i.imgur.com/aBcZluX.jpeg" alt="Rafael Saliganan" style="width:100%; border-radius:20px; box-shadow:0 0 30px rgba(255,255,255,0.2);" />
-</div>
-<div style="flex:1; min-width:280px; max-width:600px;">
-<h2>About Me</h2>
-<p>Hello! I'm Rafael Saliganan, a passionate creative and developer who loves blending technology with art to build meaningful projects.
-
-  With a background in programming and filmmaking, I thrive in problem-solving and storytelling.</p>
-</div>
-</section>
+<section id="about" class="container my-5" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2rem; text-align:left;" data-aos="fade-up">
+    <!-- Image -->
+    <div class="about-image" style="flex:1; min-width:280px; max-width:400px;">
+      <img src="https://i.imgur.com/aBcZluX.jpeg" alt="Rafael Saliganan" class="img-fluid rounded-3 shadow-sm" style="border-radius:20px; max-width:100%; object-fit:cover; height:auto;">
+    </div>
+    <!-- Info with style -->
+    <div class="about-info" style="flex:1; min-width:280px; max-width:600px; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); backdrop-filter: blur(8px); transition: all 0.3s ease;">
+      <h2 class="text-light mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">About Me</h2>
+      <p class="text-light mb-4" style="font-size: 1rem; line-height: 1.5;">Hello! I'm Rafael Saliganan, a passionate creative and developer who loves blending technology with art to build meaningful projects. My journey spans programming and filmmaking, enabling me to solve problems creatively and tell impactful stories.</p>
+      
+      <!-- Highlighted Personal Info -->
+      <div class="personal-details mb-4">
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi bi-calendar2-week-fill me-2" style="font-size:1.2rem; color:#e7e7e7;"></i>
+          <span class="text-light fw-semibold" style="font-size: 1rem;">Age: <span class="fw-normal" style="color:#ccc;">20</span></span>
+        </div>
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi bi-quote" style="font-size:1.2rem; color:#e7e7e7;"></i>
+          <span class="text-light fw-semibold ms-2" style="font-size: 1rem;">Quote:</span>
+        </div>
+        <blockquote class="blockquote text-light fst-italic" style="font-size: 1rem; border-left: 4px solid #e7e7e7; padding-left: 1rem; margin-top: 0;">
+          "Creativity is intelligence having fun." - Albert Einstein
+        </blockquote>
+      </div>
+  
+      <!-- Additional info or call to action -->
+      <p class="text-light mb-0">Let's create something extraordinary together!</p>
+    </div>
+  </section>
 
 <!-- Skills Section -->
 <section id="skills" class="projects-section" data-aos="fade-up">
@@ -2205,4 +2285,3 @@ window.scrollTo({top: 0, behavior: "smooth"});
 
 </body>
 </html>
-
